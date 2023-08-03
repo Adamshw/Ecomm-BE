@@ -19,6 +19,8 @@ export const StoreModal = () => {
     const storeModal = useStoreModal();
 
     const [loading, setLoading] = useState(false);
+
+    
     const form = useForm<z.infer<typeof formSchema>>({
         //to validate the form using zod
         resolver: zodResolver(formSchema),
