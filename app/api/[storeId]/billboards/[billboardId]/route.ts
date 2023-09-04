@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 
 export async function GET(
-  req: Request,
+  _req: Request,
   { params }: { params: { billboardId: string } }
 ) {
   try {
@@ -17,7 +17,7 @@ export async function GET(
         id: params.billboardId
       }
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
     console.log('[BILLBOARD_GET]', error);
@@ -26,8 +26,8 @@ export async function GET(
 };
 
 export async function DELETE(
-  req: Request,
-  { params }: { params: { billboardId: string, storeId: string } }
+  _req: Request,
+  { params }: { params: { storeId: string, billboardId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -56,7 +56,7 @@ export async function DELETE(
         id: params.billboardId,
       }
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
     console.log('[BILLBOARD_DELETE]', error);
@@ -69,13 +69,13 @@ export async function PATCH(
   req: Request,
   { params }: { params: { billboardId: string, storeId: string } }
 ) {
-  try {   
+  try {
     const { userId } = auth();
 
     const body = await req.json();
-    
+
     const { label, imageUrl } = body;
-    
+
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
@@ -112,7 +112,7 @@ export async function PATCH(
         imageUrl
       }
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
     console.log('[BILLBOARD_PATCH]', error);
