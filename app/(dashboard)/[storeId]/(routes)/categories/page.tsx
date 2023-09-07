@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import prismadb from "@/lib/prismadb";
 
 import { CategoryColumn } from "./components/columns"
-import { BillboardClient } from "./components/client";
+import { CategoryClient } from "./components/client";
 
 const CategoriesPage = async ({
   params
@@ -32,7 +32,7 @@ const CategoriesPage = async ({
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillboardClient data={formattedCategories} />
+        <CategoryClient data={formattedCategories} />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { Trash } from "lucide-react"
-import { Billboard } from "@prisma/client"
+import { Billboard, Category } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -118,7 +118,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                     <FormField
                         control={form.control}
                         name="imageUrl"
-                        render={({ field }) => ( 
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Background image</FormLabel>
                                 <FormControl>
