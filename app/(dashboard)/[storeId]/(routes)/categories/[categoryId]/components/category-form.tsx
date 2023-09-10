@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { Trash } from "lucide-react"
-import { Category } from "@prisma/client"
+import { Billboard, Category } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -34,6 +34,7 @@ type CategoryFormValues = z.infer<typeof formSchema>
 
 interface CategoryFormProps {
     initialData: Category | null;
+    billboards: Billboard[]
 };
 
 export const CategoryForm: React.FC<CategoryFormProps> = ({
@@ -63,7 +64,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/categories/${params.billboardId}`, data);
+                await axios.patch(`/api/${params.storeId}/categories/${params.categoryId}`, data);
             } else {
                 await axios.post(`/api/${params.storeId}/categories`, data);
             }
@@ -85,7 +86,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             router.push(`/${params.storeId}/categories`);
             toast.success('Category deleted.');
         } catch (error: any) {
-            toast.error('Make sure you removed all categories using this billboard first.');
+            toast.error('Make sure you removed all products using this category first.');
         } finally {
             setLoading(false);
             setOpen(false);
